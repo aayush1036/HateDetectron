@@ -1,3 +1,6 @@
 __pycache__/
 env/
 config.json
+*.log
+attachments/
+test.py
