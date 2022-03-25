@@ -1,4 +1,3 @@
-from typing import Any
 from nltk.stem import WordNetLemmatizer, SnowballStemmer, PorterStemmer, LancasterStemmer
 from string import punctuation
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -136,7 +135,7 @@ class Preprocess:
         X,y = self.transform(X,y)
         return X,y
     
-    def predictNew(self, message:str,model:Any)->str:
+    def predictNew(self, message:str,model)->str:
         """Predict on the basis of new message
 
         Args:
