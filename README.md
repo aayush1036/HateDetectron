@@ -21,6 +21,7 @@ The jupyter notebooks for reference is also given in the code.
 Future prospects:
 1. Use Word2Vec embeddings instead of tf-idf
 2. Try using transformers like VisualBERT instead of conventional machine learning models
+3. Search for better OCR methods to read meme texts more accuractely
 
 
 References - <a href="https://arxiv.org/pdf/2012.12975.pdf">Research paper on detecting hate speech in memes</a>
