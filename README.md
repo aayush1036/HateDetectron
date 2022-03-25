@@ -6,11 +6,10 @@ Aayushmaan Jain (J022)
 Pratyush Patro (J047)
 Calvin Pinto (J048)
 ```
-with ❤
 
 This bot aims to make discord servers a less toxic place to be in by detecting hate speeches by kicking out the users who send more than 5 hate speech messages. 
 
-If you are in a mood to rant on someone, then make sure to edit the threshold by using the command ```threshold <limit>```
+If you are in a mood to rant on someone, then make sure to edit the threshold by using the command ```$threshold <limit>```
 
 This bot is trained on two sets of data:<br>
 1. <a href="https://www.kaggle.com/datasets/mrmorj/hate-speech-and-offensive-language-dataset">Twitter hate speech data</a> for detecting hate speech in messages

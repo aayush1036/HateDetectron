@@ -6,6 +6,7 @@ import joblib
 import logging
 import cv2 
 import pytesseract
+import numpy as np 
 # Setting up the path for pytesseract
 # Uncomment the line below if you are running it on windows
 #pytesseract.pytesseract.tesseract_cmd = r'C:\Users\YOUR_USER_NAME\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
@@ -50,10 +51,11 @@ hate_counts = {}
 # Create a basic bot class with the attributes 
 class Bot:
     def __init__(self) -> None:
-        self.threshold = 5
+        self.threshold = 5 # Warning threshold
         self.server_name = 'hatespeech-server' # your SERVER_NAME here 
         self.channel_name = 'general' # your CHANNEL_NAME here 
         self.allowed_types = ['png','jpeg','jpg']
+        self.warning_threshold = np.ceil(self.threshold/2)
 
 bot = Bot()
 # Creating a function to be executed when the bot is activated 
@@ -113,6 +115,10 @@ async def on_message(message):
             # Increment the hate count 
             hate_counts[user] += 1 
             # If the user exceeds the hate count limit
+            if hate_counts[user] == bot.warning_threshold:
+                await message.channel.send(f"""
+WARNING!! {user} please stop sending hate speech messages, 
+you will be removed after sending {bot.threshold-bot.warning_threshold} hate messages""")
             if hate_counts[user] >=bot.threshold:
                 # Frame a reason for kicking the user 
                 reason = f'Sent more than {bot.threshold} hate speech messages'
@@ -151,6 +157,10 @@ async def on_message(message):
                     # Increment the hate speech for that user 
                     hate_counts[user] += 1 
                     # If the user has exceeded hate speech limit
+                    if hate_counts[user] == bot.warning_threshold:
+                        await message.channel.send(f"""
+WARNING!! {user} please stop sending hate speech messages, 
+you will be removed after sending {bot.threshold-bot.warning_threshold} hate messages""")
                     if hate_counts[user] >=bot.threshold:
                         # Frame the reason 
                         reason = f'Sent more than {bot.threshold} hate speech messages'
