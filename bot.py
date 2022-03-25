@@ -7,7 +7,8 @@ import logging
 import cv2 
 import pytesseract
 # Setting up the path for pytesseract
-pytesseract.pytesseract.tesseract_cmd = r'C:\Users\jain_\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
+# Uncomment the line below if you are running it on windows
+#pytesseract.pytesseract.tesseract_cmd = r'C:\Users\YOUR_USER_NAME\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 # Setting up logging 
 LOG_FORMAT = '%(levelname)s %(asctime)s - %(message)s'
 SAVE_PATH = 'attachments/'
