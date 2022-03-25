@@ -48,6 +48,8 @@ hate_counts = {}
 class Bot:
     def __init__(self) -> None:
         self.threshold = 5
+        self.server_name = None
+        self.channel_name = None
 
 bot = Bot()
 @client.event 
