@@ -23,5 +23,6 @@ Future prospects:
 2. Try using transformers like VisualBERT instead of conventional machine learning models
 3. Search for better OCR methods to read meme texts more accuractely
 
+<a href="https://discord.com/api/oauth2/authorize?client_id=953317423723978832&permissions=34822&scope=bot">Try our bot</a>
 
 References - <a href="https://arxiv.org/pdf/2012.12975.pdf">Research paper on detecting hate speech in memes</a>
