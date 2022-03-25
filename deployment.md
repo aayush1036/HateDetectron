@@ -12,4 +12,4 @@
 10. Activate the virtual environment by using ```source env/bin/activate```
 11. Install all the dependencies by using ```pip3 install -r requirements.txt```
 12. Run the bot by using ```python3 bot.py```
-13. Create a monthly cron job to clear the uploads by using ```cd HateDetectronn && /usr/bin/python3 clearUploads.py```
+13. Create a monthly cron job to clear the uploads by using ```0 0 1 * * cd HateDetectronn && /usr/bin/python3 clearUploads.py```
