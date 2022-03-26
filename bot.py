@@ -118,7 +118,7 @@ async def on_message(message):
             if hate_counts[user] == bot.warning_threshold:
                 await message.channel.send(f"""
 WARNING!! {user} please stop sending hate speech messages, 
-you will be removed after sending {bot.threshold-bot.warning_threshold} hate messages""")
+you will be removed after sending {int(bot.threshold-bot.warning_threshold)} hate messages""")
             if hate_counts[user] >=bot.threshold:
                 # Frame a reason for kicking the user 
                 reason = f'Sent more than {bot.threshold} hate speech messages'
@@ -160,7 +160,7 @@ you will be removed after sending {bot.threshold-bot.warning_threshold} hate mes
                     if hate_counts[user] == bot.warning_threshold:
                         await message.channel.send(f"""
 WARNING!! {user} please stop sending hate speech messages, 
-you will be removed after sending {bot.threshold-bot.warning_threshold} hate messages""")
+you will be removed after sending {int(bot.threshold-bot.warning_threshold)} hate messages""")
                     if hate_counts[user] >=bot.threshold:
                         # Frame the reason 
                         reason = f'Sent more than {bot.threshold} hate speech messages'
