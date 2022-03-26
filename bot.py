@@ -102,6 +102,7 @@ async def on_message(message):
                 # if the format is correct, then update the threshold 
                 threshold = int(content.split('$threshold')[1].strip())
                 bot.threshold = threshold
+                await message.channel.send(f'The threshold has been updated to {bot.threshold}')
             except Exception as e:
                 # if the format is incorrect, then send the correct usage pattern 
                 await message.channel.send("Usage '$threshold <limit>'")
