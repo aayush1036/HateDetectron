@@ -1,3 +1,4 @@
+from unittest import result
 from nltk.stem import WordNetLemmatizer, SnowballStemmer, PorterStemmer, LancasterStemmer
 from string import punctuation
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -6,7 +7,8 @@ from string import punctuation
 from sklearn.preprocessing import LabelEncoder
 import re 
 import pandas as pd 
-
+import numpy as np 
+import easyocr
 class Preprocess:
     def __init__(self,method='WordNetLemmatizer') -> None:
         """Preprocesses the text for the machine learning model
@@ -151,3 +153,26 @@ class Preprocess:
         pred = model.predict(message)
         # Decode the predictions 
         return self.encoder.inverse_transform(pred)[0]
+
+class Bot:
+    def __init__(self) -> None:
+        """Creates a discord bot configuration instance where you can set the properties of the bot
+        """        
+        self.threshold = 5 # Warning threshold
+        self.server_name = 'hatespeech-server' # your SERVER_NAME here 
+        self.channel_name = 'general' # your CHANNEL_NAME here 
+        self.allowed_types = ['png','jpeg','jpg']
+        self.warning_threshold = np.ceil(self.threshold/2)
+
+reader = easyocr.Reader(lang_list=['en'])
+
+def detect_text(path):
+    texts = []
+    results = reader.readtext(path,paragraph=False)
+    if len(results)>1:
+        for result in results:
+            text = result[1]
+            texts.append(text)
+        return ' '.join(texts)
+    else:
+        return results[0][1]

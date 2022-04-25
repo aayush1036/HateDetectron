@@ -3,22 +3,16 @@ import os
 import discord 
 import json
 import joblib
-import logging
-import cv2 
-import pytesseract
 import numpy as np 
+from utils import detect_text,Bot
 # Setting up the path for pytesseract
 # Uncomment the line below if you are running it on windows
 #pytesseract.pytesseract.tesseract_cmd = r'C:\Users\YOUR_USER_NAME\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 # Setting up logging 
-LOG_FORMAT = '%(levelname)s %(asctime)s - %(message)s'
 SAVE_PATH = 'attachments/'
-logging.basicConfig(filename='logs.log',
-                    level=logging.DEBUG, format=LOG_FORMAT)
 # Loading the configuration file for reading the token
 with open('config.json','rb') as f:
     config = json.load(f)
-    logging.info('Loaded the configuration file')
 
 token = config.get('token')
 # Setting up permissions for the bot to get the names of members 
@@ -29,34 +23,21 @@ client = discord.Client(intents=intents)
 # Loading up the preprocessors and models 
 with open('preprocess/imagePreprocess.pkl','rb') as f:
     image_preprocess = joblib.load(f)
-    logging.info('Loaded preprocessor for image files')
 
 with open('preprocess/textPreprocess.pkl','rb') as f:
     text_preprocess = joblib.load(f)
-    logging.info('Loaded preprocessor for text files')
 
 with open('models/imageModel.pkl','rb') as f:
     image_model = joblib.load(f)
-    logging.info('Loaded model for image files')
 
 with open('models/textModel.pkl','rb') as f:
     text_model = joblib.load(f)
-    logging.info('Loaded model for text files')
 # Creating a path to save the images sent in discord chat
 if not os.path.exists(SAVE_PATH):
     os.makedirs(SAVE_PATH)
-    logging.info('Made path for saving attachments')
 # Initializing a dictionary to store the number of hate speech messages sent by each member 
 hate_counts = {}
 # Create a basic bot class with the attributes 
-class Bot:
-    def __init__(self) -> None:
-        self.threshold = 5 # Warning threshold
-        self.server_name = 'hatespeech-server' # your SERVER_NAME here 
-        self.channel_name = 'general' # your CHANNEL_NAME here 
-        self.allowed_types = ['png','jpeg','jpg']
-        self.warning_threshold = np.ceil(self.threshold/2)
-
 bot = Bot()
 # Creating a function to be executed when the bot is activated 
 @client.event 
@@ -144,11 +125,9 @@ you will be removed after sending {int(bot.threshold-bot.warning_threshold)} hat
             # Loop through filenames list
             for filename in filenames:
                 # Read the image 
-                img = cv2.imread(os.path.join(SAVE_PATH, filename))
-                # Convert it to rgb
-                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-                # Perform OCR to recognize the text in the image 
-                text = pytesseract.image_to_string(img)
+                path = os.path.join(SAVE_PATH, filename)
+                # Perform OCR to recognize the text in the image
+                text = detect_text(path)
                 # Make a prediction 
                 pred = image_preprocess.predictNew(text, image_model)
                 # If the message is hate speech
