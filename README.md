@@ -1,11 +1,11 @@
 # HateDetectorBot 
 
 Made by team HateDetectron<br>
-```
-Aayushmaan Jain (J022)
-Pratyush Patro (J047)
-Calvin Pinto (J048)
-```
+
+<a href="mailto:aayushmaan1306@gmail.com">Aayushmaan Jain</a><br>
+<a href="mailto:patro.pratyush51@nmims.edu.in">Pratyush Patro</a><br>
+<a href="mailto:pinto.calvin52@nmims.edu.in">Calvin Pinto</a>
+
 
 This bot aims to make discord servers a less toxic place to be in by detecting hate speeches by kicking out the users who send more than 5 hate speech messages. 
 
